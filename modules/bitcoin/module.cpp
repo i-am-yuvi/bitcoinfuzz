@@ -1,9 +1,12 @@
 #include <optional>
 #include <span>
 
+#include "blockencodings.h"
 #include "chainparams.h"
 #include "consensus/validation.h"
+#include "core_io.h"
 #include "descriptor.h"
+#include "key_io.h"
 #include "module.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
@@ -14,8 +17,6 @@
 #include "streams.h"
 #include "util/chaintype.h"
 #include "validation.h"
-#include "core_io.h"
-#include "key_io.h"
 
 namespace {
 class FuzzedSignatureChecker : public BaseSignatureChecker

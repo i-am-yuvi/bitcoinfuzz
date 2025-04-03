@@ -57,4 +57,9 @@ namespace bitcoinfuzz
     {
         return std::nullopt;
     }
+
+    std::optional<int> BaseModule::cmpctblocks_parse(std::span<const uint8_t> buffer) const
+    {
+        return std::nullopt;
+    }
 }

@@ -30,5 +30,6 @@ namespace bitcoinfuzz
         void AddressParseTarget(std::span<const uint8_t> buffer) const;
         void PSBTParseTarget(std::span<const uint8_t> buffer) const;
         void AddrV2Target(std::span<const uint8_t> buffer) const;
+        void CompactBlocksTarget(std::span<const uint8_t> buffer) const;
     };
 }
