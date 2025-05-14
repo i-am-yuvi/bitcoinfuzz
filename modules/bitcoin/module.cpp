@@ -367,5 +367,20 @@ std::optional<std::string> Bitcoin::addrv2_parse(std::span<const uint8_t> buffer
            "cjdns=" + std::to_string(cjdns) + "i2p=" + std::to_string(i2p);
 }
 
+std::optional<int> Bitcoin::cmpctblocks_parse(std::span<const uint8_t> buffer) const
+{
+    DataStream ds{buffer};
+    CBlockHeaderAndShortTxIDs block_header_and_short_txids;
+
+    try {
+        ds >> block_header_and_short_txids;
+    } catch (const std::ios_base::failure& e) {
+        if (std::string(e.what()).find("Superflous witness record") != std::string::npos)
+            return -2;
+        return std::nullopt;
+    }
+    return block_header_and_short_txids.BlockTxCount();
+}
+
 } // namespace module
 } // namespace bitcoinfuzz

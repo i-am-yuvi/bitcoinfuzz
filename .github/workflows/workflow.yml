@@ -202,4 +202,11 @@ jobs:
           export CXXFLAGS="-DLDK -DLND -DCLIGHTNING -DCUSTOM_MUTATOR_BOLT11"
           (cd ./modules/bitcoin && make clean)
           make
-          ASAN_OPTIONS=detect_leaks=0 FUZZ=deserialize_invoice ./bitcoinfuzz -runs=100
+          ASAN_OPTIONS=detect_leaks=0 FUZZ=deserialize_invoice ./bitcoinfuzz -runs=100   
+
+      - name: Test - cmpctblocks_parse
+        run: |
+          export CXXFLAGS="-DBITCOIN_CORE -DRUST_BITCOIN"
+          make
+          FUZZ=cmpctblocks_parse ./bitcoinfuzz -runs=100
+
