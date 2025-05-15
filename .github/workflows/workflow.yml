@@ -144,12 +144,6 @@ jobs:
         run: |
           cd modules/clightning && make
 
-      - name: Test - cmpctblocks_parse
-        run: |
-          export CXXFLAGS="-DBITCOIN_CORE -DRUST_BITCOIN"
-          make
-          FUZZ=cmpctblocks_parse ./bitcoinfuzz -runs=100
-
       - name: Test - script
         timeout-minutes: 5
         run: |
@@ -202,6 +196,12 @@ jobs:
           export CXXFLAGS="-DEMBIT -DRUST_BITCOIN -DBTCD"
           make
           ASAN_OPTIONS=detect_leaks=0 FUZZ=psbt_parse ./bitcoinfuzz -runs=100
+      
+      - name: Test - cmpctblocks_parse
+        run: |
+          export CXXFLAGS="-DBITCOIN_CORE -DRUST_BITCOIN"
+          make
+          FUZZ=cmpctblocks_parse ./bitcoinfuzz -runs=100
 
       - name: Test - deserialize_invoice
         run: |
